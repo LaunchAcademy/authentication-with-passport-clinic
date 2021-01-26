@@ -12,7 +12,7 @@ import AuthenticatedRoute from "./authentication/AuthenticatedRoute.js"
 import UserProfile from "./UserProfile.js"
 import AuthedUserProfile from "./AuthedUserProfile.js"
 
-const App = (props) => {
+const App = (pops) => {
   const [currentUser, setCurrentUser] = useState(undefined);
 
   // define state above the rest of the app, so that this state can be accessed across the app 
@@ -26,7 +26,6 @@ const App = (props) => {
       });
   }, []);
 
-
   return (
     <Router>
       <TopBar user={currentUser} />
@@ -37,6 +36,7 @@ const App = (props) => {
         </Route>
        
         <Route exact path="/users/new" component={RegistrationForm} />
+
         <Route exact path="/user-sessions/new" component={SignInForm} />
 
         <AuthenticatedRoute exact path="/authed-profile" component={AuthedUserProfile} user={currentUser} />

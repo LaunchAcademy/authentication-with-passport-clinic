@@ -3,7 +3,7 @@ const UserProfile = (props) => {
  console.log(props)
 
   let message = ""
-  if (props.user !== undefined ){
+  if (props.user !== undefined && props.user !== null ){
     message = props.user.email
   }
 

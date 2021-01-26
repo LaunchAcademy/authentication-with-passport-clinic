@@ -9,7 +9,7 @@ const AuthedUserProfile = (props) => {
 
   return (
     <div>
-      <h1>This is a page built specifically for a user to see</h1>
+      <h1>ONLY SIGNED IN KIDS CAN SEE</h1>
       <div>The current user is: {message} </div>
     </div>
   )
