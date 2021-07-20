@@ -1,4 +1,5 @@
 import React from "react"
+
 const UserProfile = (props) => {
  console.log(props)
 
@@ -14,4 +15,5 @@ const UserProfile = (props) => {
     </div>
   )
 }
+
 export default UserProfile

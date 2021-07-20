@@ -34,12 +34,14 @@ const App = (pops) => {
         <Route exact path="/profile">
           <UserProfile user={currentUser} />
         </Route>
+
+        <Router exact path="/profile" component={UserProfile} />
        
-        <Route exact path="/users/new" component={RegistrationForm} />
+        <Route exact path="/users/new" component={RegistrationForm}/>
 
         <Route exact path="/user-sessions/new" component={SignInForm} />
 
-        <AuthenticatedRoute exact path="/authed-profile" component={AuthedUserProfile} user={currentUser} />
+        <AuthenticatedRoute exact={true} path="/authed-profile" component={AuthedUserProfile} user={currentUser} />
 
       </Switch>
     </Router>
