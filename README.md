@@ -1,15 +1,18 @@
-# Signing Up 
-# Signing In 
-# Signing Out 
 
-# Behind the Scenes Passport middlewares 
+# User Authentication with Passport Clinic
 
-# Using Authenticated Route 
-# Passing User down as a prop 
+### Signing Up 
+### Signing In 
+### Signing Out 
+
+### Behind the Scenes Passport middlewares 
+
+### Using Authenticated Route 
+### Passing User down as a prop 
 
 ---
 
-# Important items to note: 
+### Important items to note: 
 
 
 * need to make .env in server, otherwise sessions won't be stored, and you wont be able to retrieve user after signing in 
