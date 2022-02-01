@@ -7,17 +7,16 @@ const sessionRouter = new express.Router();
 const myTVSHOWAPIKEY= `[process.env.TVSHOWAPIKEY]`
 
 
-
-
 sessionRouter.post("/", (req, res, next) => {
-  return passport.authenticate("local", (err, user) => { // built into passport, uses the strategy we setup to find the user by looking at params
+  // built into passport, uses the strategy we setup to find the user by looking at params
+  return passport.authenticate("local", (err, user) => { 
     if (err) {
-      // eslint-disable-next-line no-console
       console.log(err);
     }
 
     if (user) {
-      return req.login(user, () => { // login the user if the authentication fails 
+      // login the user if the authentication fails 
+      return req.login(user, () => { 
         return res.status(201).json(user);
       });
     }

@@ -26,11 +26,14 @@ const App = (pops) => {
       });
   }, []);
 
+  console.log(currentUser)
+
   return (
     <Router>
       <TopBar user={currentUser} />
       <Switch>
         
+        {/* passing user down without requiring a login */}
         <Route exact path="/profile">
           <UserProfile user={currentUser} />
         </Route>
@@ -41,6 +44,7 @@ const App = (pops) => {
 
         <Route exact path="/user-sessions/new" component={SignInForm} />
 
+        {/* passing a user down AND requiring login to see the page */}
         <AuthenticatedRoute exact={true} path="/authed-profile" component={AuthedUserProfile} user={currentUser} />
 
       </Switch>

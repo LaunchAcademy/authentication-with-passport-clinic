@@ -24,4 +24,4 @@ const authHandler = (email, password, done) => {
 };
 
 export default new local.Strategy({ usernameField: "email" }, authHandler);
-// ensures that a user's identifier for authentical is their email
+// ensures that a user's identifier for authentication is their email
