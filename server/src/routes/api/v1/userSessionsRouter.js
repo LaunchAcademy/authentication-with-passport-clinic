@@ -3,17 +3,13 @@ import passport from "passport";
 
 const sessionRouter = new express.Router();
 
-
-const myTVSHOWAPIKEY= `[process.env.TVSHOWAPIKEY]`
-
-
 sessionRouter.post("/", (req, res, next) => {
   // built into passport, uses the strategy we setup to find the user by looking at params
   return passport.authenticate("local", (err, user) => { 
     if (err) {
       console.log(err);
     }
-
+    
     if (user) {
       // login the user if the authentication fails 
       return req.login(user, () => { 

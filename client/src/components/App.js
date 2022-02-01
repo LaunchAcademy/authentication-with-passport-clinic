@@ -12,10 +12,11 @@ import AuthenticatedRoute from "./authentication/AuthenticatedRoute.js"
 import UserProfile from "./UserProfile.js"
 import AuthedUserProfile from "./AuthedUserProfile.js"
 
-const App = (pops) => {
+const App = (props) => {
   const [currentUser, setCurrentUser] = useState(undefined);
 
   // define state above the rest of the app, so that this state can be accessed across the app 
+  
   useEffect(() => {
     getCurrentUser()
       .then((user) => {
@@ -25,8 +26,6 @@ const App = (pops) => {
         setCurrentUser(null);
       });
   }, []);
-
-  console.log(currentUser)
 
   return (
     <Router>
@@ -38,14 +37,22 @@ const App = (pops) => {
           <UserProfile user={currentUser} />
         </Route>
 
-        <Router exact path="/profile" component={UserProfile} />
+
+        <Route exact path="/pastas/:id">
+          <UserProfile user={currentUser} />
+        </Route>
        
         <Route exact path="/users/new" component={RegistrationForm}/>
 
         <Route exact path="/user-sessions/new" component={SignInForm} />
 
         {/* passing a user down AND requiring login to see the page */}
-        <AuthenticatedRoute exact={true} path="/authed-profile" component={AuthedUserProfile} user={currentUser} />
+        <AuthenticatedRoute 
+          exact={true} 
+          path="/authed-profile" 
+          component={AuthedUserProfile} 
+          user={currentUser} 
+        />
 
       </Switch>
     </Router>
