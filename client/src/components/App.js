@@ -14,8 +14,6 @@ import AuthedUserProfile from "./AuthedUserProfile.js"
 
 const App = (props) => {
   const [currentUser, setCurrentUser] = useState(undefined);
-
-  // define state above the rest of the app, so that this state can be accessed across the app 
   
   useEffect(() => {
     getCurrentUser()
@@ -28,28 +26,16 @@ const App = (props) => {
   }, []);
 
   return (
+    // eslint-disable-next-line react/jsx-filename-extension
     <Router>
       <TopBar user={currentUser} />
       <Switch>
-        
-        {/* passing user down without requiring a login */}
-        <Route exact path="/profile">
-          <UserProfile user={currentUser} />
-        </Route>
-
-
-        <Route exact path="/pastas/:id">
-          <UserProfile user={currentUser} />
-        </Route>
-       
         <Route exact path="/users/new" component={RegistrationForm}/>
-
         <Route exact path="/user-sessions/new" component={SignInForm} />
 
-        {/* passing a user down AND requiring login to see the page */}
         <AuthenticatedRoute 
           exact={true} 
-          path="/authed-profile" 
+          path="/profile" 
           component={AuthedUserProfile} 
           user={currentUser} 
         />
