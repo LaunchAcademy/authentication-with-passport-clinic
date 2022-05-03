@@ -3,10 +3,10 @@ import local from "passport-local";
 import User from "../models/User.js";
 
 const authHandler = (email, password, done) => {
-  // called when using passport's local strategy 
+  // called when using passport's local strategy
 
   // take in the email, password from the sign in form, and try to use that to match a user in the DB
-  // If the user is found, safely compared their password to the persisted one in the DB 
+  // If the user is found, safely compared their password to the persisted one in the DB
   // if successful, return the user and move on, otherwise something is wrong with their credentials
 
   User.query()
@@ -17,9 +17,9 @@ const authHandler = (email, password, done) => {
           return done(null, user);
         }
 
-        return done(null, false, { message: "Invalid credentials" });
+        return done(null, false, { message: "Invalid password credentials" });
       }
-      return done(null, false, { message: "Invalid credentials" });
+      return done(null, false, { message: "Invalid email credentials" });
     });
 };
 
