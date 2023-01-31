@@ -23,8 +23,6 @@ sessionRouter.post("/", (req, res, next) => {
 });
 
 sessionRouter.get("/current", async (req, res) => {
-  // session: { userId: 12}
-  // req.user = await User.find_byId(session.userId) // this is the deserialize
 
   // this endpoint helps us check if there is a signed in user, especially any time the page refreshes
   if (req.user) {

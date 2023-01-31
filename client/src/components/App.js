@@ -9,7 +9,7 @@ import SignInForm from "./authentication/SignInForm";
 import TopBar from "./layout/TopBar";
 import AuthenticatedRoute from "./authentication/AuthenticatedRoute.js";
 
-import UserProfile from "./UserProfile.js";
+import RandomPage from "./RandomPage.js";
 import AuthedUserProfile from "./AuthedUserProfile.js";
 
 const App = (props) => {
@@ -33,14 +33,14 @@ const App = (props) => {
     <Router>
       <TopBar user={currentUser} />
       <Switch>
+        <Route exact path="/users/new" component={RegistrationForm} />
+        <Route exact path="/user-sessions/new" component={SignInForm} />
+
         {/* passing user down without requiring a login */}
-        <Route exact path="/profile">
-          <UserProfile user={currentUser} />
+        <Route exact path="/random-page">
+          <RandomPage user={currentUser} />
         </Route>
 
-        <Route exact path="/users/new" component={RegistrationForm} />
-
-        <Route exact path="/user-sessions/new" component={SignInForm} />
 
         {/* passing a user down AND requiring login to see the page */}
         <AuthenticatedRoute
@@ -49,6 +49,7 @@ const App = (props) => {
           component={AuthedUserProfile}
           user={currentUser}
         />
+
  
       </Switch>
     </Router>
@@ -56,3 +57,22 @@ const App = (props) => {
 };
 
 export default hot(App);
+
+
+// const RestaurantShow = (props) => {
+//   // restaurant state
+
+//   let reviewForm = "Login if you want to write a review"
+//   if (props.user){
+//     reviewForm = <ReviewForm />
+//   }
+
+
+//   return (
+//     <div>
+//       {restaurant.name}
+
+//       {reviewForm}
+//     </div>
+//   )
+// }
