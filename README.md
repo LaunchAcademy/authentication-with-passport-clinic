@@ -1,39 +1,5 @@
 # User Authentication with Passport Clinic
 
-## Everyone needs to update their devDependencies after clinic
-
-```
-{
-  ...rest of file
-  "devDependencies": {
-    "@babel/core": "^7.12.10",
-    "@babel/preset-env": "^7.12.11",
-    "@types/express": "^4.17.11",
-    "@types/jest": "^26.0.20",
-    "babel-jest": "^26.6.3",
-    "dotenv": "^8.2.0",
-    "errorhandler": "^1.5.1",
-    "eslint": "7.2.0",
-    "eslint-config-airbnb": "18.2.1",
-    "eslint-config-prettier": "^7.2.0",
-    "eslint-plugin-import": "^2.22.1",
-    "eslint-plugin-jsx-a11y": "^6.4.1",
-    "eslint-plugin-prettier": "^3.3.1",
-    "eslint-plugin-react": "^7.21.5",
-    "eslint-plugin-react-hooks": "4.0.0",
-    "install-peerdeps": "^3.0.0",
-    "jest": "^26.6.3",
-    "nodemon": "^2.0.7",
-    "webpack": "^5.3.2",
-    "webpack-dev-middleware": "^4.0.0",
-    "webpack-hot-middleware": "^2.25.0"
-  },
-  "dependencies": {
-    ...other dependencies
-  }
-}
-```
-
 ---
 
 ### Important items to note: 
