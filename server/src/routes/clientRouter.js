@@ -8,10 +8,13 @@ const clientRoutes = ["/", "/user-sessions/new", "/users/new"];
 const authedClientRoutes = ["/profile", "/authed-profile"];
 
 router.get(clientRoutes, (req, res) => {
+  console.log(req.user)
   res.sendFile(getClientIndexPath());
 });
 
 router.get(authedClientRoutes, (req, res) => {
+  
+  console.log(req.user)
   if (req.user) {
     res.sendFile(getClientIndexPath());
   } else {

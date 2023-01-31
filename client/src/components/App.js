@@ -49,12 +49,7 @@ const App = (props) => {
           component={AuthedUserProfile}
           user={currentUser}
         />
-        {/* <AuthenticatedRoute
-          exact={true}
-          path="/authed-cats"
-          component={AuthedCatProfile}
-          user={currentUser}
-        /> */}
+ 
       </Switch>
     </Router>
   );
