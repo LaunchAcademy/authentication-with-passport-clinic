@@ -3,7 +3,7 @@ import React from "react"
 const RandomPage = (props) => {
  console.log(props)
 
-  let message = ""
+  let message = "there is no user"
   if (props.user !== undefined && props.user !== null ){
     message = props.user.email
   }

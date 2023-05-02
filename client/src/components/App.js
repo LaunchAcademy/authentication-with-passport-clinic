@@ -14,6 +14,10 @@ import AuthedUserProfile from "./AuthedUserProfile.js";
 
 const App = (props) => {
   const [currentUser, setCurrentUser] = useState(undefined);
+  // undefined - means we have not tried to fetch who the current user is
+  // null - tried to fetch current user, but no user signed in
+  // user - someone is signed in
+
 
   // define state above the rest of the app, so that this state can be accessed across the app
   const fetchCurrentUser = async () => {
@@ -45,7 +49,7 @@ const App = (props) => {
         {/* passing a user down AND requiring login to see the page */}
         <AuthenticatedRoute
           exact={true}
-          path="/authed-profile"
+          path="/profile"
           component={AuthedUserProfile}
           user={currentUser}
         />
