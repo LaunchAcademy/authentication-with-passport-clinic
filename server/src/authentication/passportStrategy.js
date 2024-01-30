@@ -8,7 +8,7 @@ const authHandler = (email, password, done) => {
   // take in the email, password from the sign in form, and try to use that to match a user in the DB
   // If the user is found, safely compared their password to the persisted one in the DB
   // if successful, return the user and move on, otherwise something is wrong with their credentials
-  console.log("auth handler about to find a user to authenticate when signing in")
+  console.log("auth handler about to find a user to authenticate when signing in");
   User.query()
     .findOne({ email })
     .then((user) => {
@@ -16,10 +16,11 @@ const authHandler = (email, password, done) => {
         if (user.authenticate(password)) {
           return done(null, user);
         }
-
-        return done(null, false, { message: "Invalid password credentials" });
+        // console.log("invalid password");
+        return done({ invalid: "password credentials" }, false);
       }
-      return done(null, false, { message: "Invalid email credentials" });
+      // console.log("invalid email");
+      return done({ invalid: "email credentials" }, false);
     });
 };
 

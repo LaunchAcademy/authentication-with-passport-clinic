@@ -7,6 +7,7 @@ sessionRouter.post("/", (req, res, next) => {
   // built into passport, uses the strategy we setup to find the user by looking at params
   return passport.authenticate("local", (err, user) => {
     if (err) {
+      // eslint-disable-next-line no-console
       console.log(err);
     }
 
@@ -17,18 +18,21 @@ sessionRouter.post("/", (req, res, next) => {
       });
     }
 
-    return res.status(401).json(undefined);
-    // return res.status(401).json({ errors: err });
+    return res.status(401).json({
+      message:
+        "Either email or password are incorrect. Please try again, or Sign Up to create a new account.",
+    });
   })(req, res, next); // weirdly, the authenticate method returns a function, so we need to pass req, res and next to that function
 });
 
 sessionRouter.get("/current", async (req, res) => {
-
+  console.log(req.user);
   // this endpoint helps us check if there is a signed in user, especially any time the page refreshes
   if (req.user) {
     res.status(200).json(req.user);
   } else {
     res.status(401).json(undefined);
+    // return res.status(401).json({ errors: err });
   }
 });
 

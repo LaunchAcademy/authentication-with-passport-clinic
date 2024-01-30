@@ -18,7 +18,6 @@ const App = (props) => {
   // null - tried to fetch current user, but no user signed in
   // user - someone is signed in
 
-
   // define state above the rest of the app, so that this state can be accessed across the app
   const fetchCurrentUser = async () => {
     try {
@@ -45,7 +44,6 @@ const App = (props) => {
           <RandomPage user={currentUser} />
         </Route>
 
-
         {/* passing a user down AND requiring login to see the page */}
         <AuthenticatedRoute
           exact={true}
@@ -53,15 +51,12 @@ const App = (props) => {
           component={AuthedUserProfile}
           user={currentUser}
         />
-
- 
       </Switch>
     </Router>
   );
 };
 
 export default hot(App);
-
 
 // const RestaurantShow = (props) => {
 //   // restaurant state
@@ -70,7 +65,6 @@ export default hot(App);
 //   if (props.user){
 //     reviewForm = <ReviewForm />
 //   }
-
 
 //   return (
 //     <div>

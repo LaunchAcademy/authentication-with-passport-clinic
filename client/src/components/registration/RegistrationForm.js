@@ -1,6 +1,10 @@
 import React, { useState } from "react";
-import FormError from "../layout/FormError";
+
 import config from "../../config";
+
+import ErrorList from "../layout/ErrorList";
+import FormError from "../layout/FormError";
+import translateServerErrors from "../../services/translateServerErrors";
 
 const RegistrationForm = () => {
   const [userPayload, setUserPayload] = useState({
@@ -10,11 +14,12 @@ const RegistrationForm = () => {
   });
 
   const [errors, setErrors] = useState({});
-
+  const [serverErrors, setServerErrors] = useState({});
   const [shouldRedirect, setShouldRedirect] = useState(false);
 
   const validateInput = (payload) => {
     setErrors({});
+    setServerErrors({});
     const { email, password, passwordConfirmation } = payload;
     const emailRegexp = config.validation.email.regexp.emailRegex;
     let newErrors = {};
@@ -48,34 +53,37 @@ const RegistrationForm = () => {
 
     setErrors(newErrors);
     if (Object.keys(newErrors).length === 0) {
-      return true
+      return true;
     }
-    return false
+    return false;
   };
 
   const onSubmit = async (event) => {
     event.preventDefault();
-    if (validateInput(userPayload)) {
-      try {
-        if (Object.keys(errors).length === 0) {
-          const response = await fetch("/api/v1/users", {
-            method: "post",
-            body: JSON.stringify(userPayload),
-            headers: new Headers({
-              "Content-Type": "application/json",
-            }),
-          });
-          if (!response.ok) {
-            const errorMessage = `${response.status} (${response.statusText})`;
-            const error = new Error(errorMessage);
-            throw error;
+
+    try {
+      if (validateInput(userPayload)) {
+        const response = await fetch("/api/v1/users", {
+          method: "POST",
+          body: JSON.stringify(userPayload),
+          headers: new Headers({
+            "Content-Type": "application/json",
+          }),
+        });
+        if (!response.ok) {
+          if (response.status === 422) {
+            const body = await response.json();
+            const newServerErrors = translateServerErrors(body.errors);
+            return setServerErrors(newServerErrors);
           }
-          const userData = await response.json();
-          setShouldRedirect(true);
+          const errorMessage = `${response.status} (${response.statusText})`;
+          const error = new Error(errorMessage);
+          throw error;
         }
-      } catch (err) {
-        console.error(`Error in fetch: ${err.message}`);
+        return setShouldRedirect(true);
       }
+    } catch (err) {
+      console.error(`Error in fetch: ${err.message}`);
     }
   };
 
@@ -88,14 +96,13 @@ const RegistrationForm = () => {
 
   if (shouldRedirect) {
     location.href = "/";
-    // instead of a <Redirect />
-    // force a full refresh of the page and update the current user being stored in our state
   }
 
   return (
-    <div className="grid-container" onSubmit={onSubmit}>
+    <div className="grid-container">
       <h1>Register</h1>
-      <form>
+      <ErrorList errors={serverErrors} />
+      <form onSubmit={onSubmit}>
         <div>
           <label>
             Email
